@@ -1,0 +1,18 @@
+<form action="/waiter" method="post">
+
+{{msg}}
+<hr>
+<input type="checkbox" name="days" value="sun"> Sunday <br>
+<input type="checkbox" name="days" value="mon"> Monday <br>
+<input type="checkbox" name="days" value="tue"> Tuesday <br>
+<input type="checkbox" name="days" value="wed"> Wednesday <br>
+<input type="checkbox" name="days" value="thur"> Thursday <br>
+<input type="checkbox" name="days" value="fri"> Friday <br>
+<input type="checkbox" name="days" value="sat"> Saturday
+<hr>
+    {{daysSent}}
+    <hr>
+<button type="submit" name="sendDays">Send Days</button>
+    <hr>
+    {{selectError}}
+</form>
