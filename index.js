@@ -13,7 +13,7 @@ app.listen(8081, function(){
     console.log('app running on port 8081')
 });
 
-const mongoURL = process.env.MONGO_DB_URL || "mongodb://waiter:waiter@ds149373.mlab.com:49373/waiter_app";
+const mongoURL = process.env.MONGO_DB_URL || "mongodb://localhost/waiter_app";
 mongoose.connect(mongoURL);
 
 var db = mongoose.connection;
@@ -24,12 +24,19 @@ console.log('We are connected');
 
 var testSchema = mongoose.Schema({
     user: String,
-    pass: String,
-    days: String
+//    pass: String,
+    days: {
+        Sunday: Boolean,
+        Monday: Boolean,
+        Tuesday: Boolean,
+        Wednesday: Boolean,
+        Thursday: Boolean,
+        Friday: Boolean,
+        Saturday: Boolean
+    }
 });
 
 var waiterModel = mongoose.model('waiterModel', testSchema);
-
 
 app.get('/login', function(req, res){
     res.render('login');
@@ -44,7 +51,7 @@ var onlineUser = "";
 
 function statusMsg(stats) {
     if (stats == true) {
-        return "Yaa!";
+        return "Please select days before pressing the send button!";
     }
 }
 
@@ -53,14 +60,25 @@ app.get('/waiter/:user', function(req, res){
     res.render('waiter', {msg: 'Welcome ' + req.params.user, selectError: statusMsg(status)});
 });
 
-app.post('/waiter', function(req, res){
+app.post('/waiter/:user', function(req, res){
     var daysSelected = req.body.days;
-    console.log(daysSelected);
+    var user = req.params.user;
+    var pushedDays = {};
+    
+    if(!Array.isArray (daysSelected)){
+        daysSelected = [daysSelected]
+    }
+    daysSelected.forEach(function(day){
+        pushedDays[day] = true;
+    })
+    
     if(daysSelected){
-        var newUser = new waiterModel ({
-            days: daysSelected
+        var newShift = new waiterModel({
+            user: user,
+            days: pushedDays
         });
-        newUser.save(function(err){
+        
+        newShift.save(function(err){
         if (err) {
                 console.log(err);
         }
@@ -72,32 +90,3 @@ app.post('/waiter', function(req, res){
       res.redirect('/waiter/' + onlineUser);
     }
 });
-
-//app.post('/login', function(req, res){
-//    var username = req.body.username;
-//    var password = req.body.password;
-//    
-//    
-//});
-//
-//app.post('/signUp', function(req, res){
-//    var setUsername = req.body.setUsername;
-//    var setPassword = req.body.setPassword;
-//    var confirmPassword = req.body.confirmPassword;
-//    
-//    if(setPassword === confirmPassword){
-//        var newUser = new waiterModel ({
-//            user: setUsername,
-//            pass: confirmPassword
-//        });
-//        newUser.save(function(err){
-//        if (err) {
-//                console.log(err);
-//            }
-//        });
-//        res.render('login', {successlogin: 'your signUp was successful, login here:'});
-//    } else if (setPassword !== confirmPassword) {
-//        console.log('Error');
-//        res.render('signup', {signupfail: 'password should match, plaese try again'})
-//    }
-//});
