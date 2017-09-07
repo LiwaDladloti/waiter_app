@@ -90,3 +90,69 @@ app.post('/waiter/:user', function(req, res){
       res.redirect('/waiter/' + onlineUser);
     }
 });
+
+app.get('/days', function(req, res){
+    var workingDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    
+    var waitersShifts = {
+         Sunday: {
+            waiter:  []
+         },
+         Monday: {
+            waiter: []
+        },
+         Tuesday: {
+             waiter: []
+         },
+         Wednesday: {
+             waiter: []
+         },
+         Thursday: {
+             waiter: []
+         },
+         Friday: {
+             waiter: []
+         },
+         Saturday: {
+             waiter: []
+         }
+        }
+    
+    waiterModel.find({}, function(err, results){
+//        console.log(results)
+        if(err){
+            console.log(err)
+        } else {
+            
+            results.forEach(function(shift){
+//                console.log(shift.user)
+                workingDays.forEach(function(day){
+                    if(shift[day]){
+//                    console.log(shift[day])
+                        waitersShifts[day].waiter.push(shift.useer)
+//                        day.push(shift.user)
+                    }
+                })
+            })
+//            console.log(Sunday)
+            
+//            for (var i = 0; i < results.length; i++) {
+////                console.log(results[i].days);
+//                var daysObj = results[i].days;
+//                console.log(daysObj.Friday);
+//                var users = results[i].user;
+////                console.log(users)
+//                for (var key in daysObj) {
+////                    console.log(key)
+//                    if (key === 'Sunday') {
+//                        sunday.push(users)
+//                    } else if (key === 'Monday') {
+//                        monday.push(users)
+//                    }
+//                }
+//            }
+        res.render('days', {sun: waitersShifts})
+        }
+//        console.log("this is sunday", sunday)
+    })
+})
