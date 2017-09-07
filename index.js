@@ -127,9 +127,9 @@ app.get('/days', function(req, res){
             results.forEach(function(shift){
 //                console.log(shift.user)
                 workingDays.forEach(function(day){
-                    if(shift[day]){
+                    if(shift.days[day]){
 //                    console.log(shift[day])
-                        waitersShifts[day].waiter.push(shift.useer)
+                        waitersShifts[day].waiter.push(shift.user)
 //                        day.push(shift.user)
                     }
                 })
@@ -151,7 +151,7 @@ app.get('/days', function(req, res){
 //                    }
 //                }
 //            }
-        res.render('days', {sun: waitersShifts})
+        res.render('days', {waiterName: waitersShifts})
         }
 //        console.log("this is sunday", sunday)
     })
