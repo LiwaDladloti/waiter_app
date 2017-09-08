@@ -72,24 +72,44 @@ app.post('/waiter/:user', function(req, res){
         pushedDays[day] = true;
     })
     
-    if(daysSelected){
-        var newShift = new waiterModel({
-            user: user,
+        waiterModel.findOneAndUpdate({
+            user: user},
+            {
             days: pushedDays
-        });
-        
-        newShift.save(function(err){
-        if (err) {
+        },
+        function(err, result){
+            if(err){
+                console.log(err)
+            } else {
+                if(!result){
+                var newShift = new waiterModel({
+                user: user,
+                days: pushedDays
+            })
+            newShift.save(function(err){
+            if (err) {
                 console.log(err);
-        }
-        res.render('waiter', {daysSent: 'days sent successfully :)'});
-    }); 
-    } else {
-      console.log('error');
-      status = true;
-      res.redirect('/waiter/' + onlineUser);
+            } else {
+                res.render('waiter', {daysSent: 'days sent successfully :)'});
+            }
+        })
+    }  else {
+    res.render('waiter', {daysSent: 'days updated successfully :)'})
     }
+}    
+//    else {
+//      console.log('error');
+//      status = true;
+//      res.redirect('/waiter/' + onlineUser);
+//    }
+})
 });
+    
+//    if(daysSelected){
+//        var newShift = new waiterModel({
+//            user: user,
+//            days: pushedDays
+//        });
 
 app.get('/days', function(req, res){
     var workingDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -119,40 +139,17 @@ app.get('/days', function(req, res){
         }
     
     waiterModel.find({}, function(err, results){
-//        console.log(results)
         if(err){
             console.log(err)
         } else {
-            
             results.forEach(function(shift){
-//                console.log(shift.user)
                 workingDays.forEach(function(day){
                     if(shift.days[day]){
-//                    console.log(shift[day])
                         waitersShifts[day].waiter.push(shift.user)
-//                        day.push(shift.user)
                     }
                 })
             })
-//            console.log(Sunday)
-            
-//            for (var i = 0; i < results.length; i++) {
-////                console.log(results[i].days);
-//                var daysObj = results[i].days;
-//                console.log(daysObj.Friday);
-//                var users = results[i].user;
-////                console.log(users)
-//                for (var key in daysObj) {
-////                    console.log(key)
-//                    if (key === 'Sunday') {
-//                        sunday.push(users)
-//                    } else if (key === 'Monday') {
-//                        monday.push(users)
-//                    }
-//                }
-//            }
         res.render('days', {waiterName: waitersShifts})
         }
-//        console.log("this is sunday", sunday)
-    })
-})
+    });
+});
