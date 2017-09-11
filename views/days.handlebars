@@ -6,89 +6,74 @@
     </head>
     
     <body>
-        <div>
-            <h3>Sunday</h3>
-            <hr>
-            <ul>
-                {{#each waiterName.Sunday.waiter}}
-                    <li>
-                        {{this}}
-                    </li>
-                {{/each}}
-            </ul>
-        </div>
         
-        <div>
-            <h3>Monday</h3>
-            <hr>
-            <ul>
-                {{#each waiterName.Monday.waiter}}
-                    <li>
-                        {{this}}
-                    </li>
-                {{/each}}
-            </ul>
-        </div>
+        <h1>AVAILABLE WAITERS</h1>
         
-        <div>
-            <h3>Tuesday</h3>
-            <hr>
-            <ul>
-                {{#each waiterName.Tuesday.waiter}}
+        <table>
+            <thead>
+                <th>Sunday</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+            </thead>
+            <tbody>
+                <td>                
+                    {{#each waiterName.Sunday.waiter}}
                     <li>
                         {{this}}
                     </li>
                 {{/each}}
-            </ul>
-        </div>
-        
-        <div>
-            <h3>Wednesday</h3>
-            <hr>
-            <ul>
-                {{#each waiterName.Wednesday.waiter}}
+                </td>
+                <td>                
+                    {{#each waiterName.Monday.waiter}}
                     <li>
                         {{this}}
                     </li>
                 {{/each}}
-            </ul>
-        </div>
-        
-        <div>
-            <h3>Thursday</h3>
-            <hr>
-            <ul>
-                {{#each waiterName.Thursday.waiter}}
+                </td>
+                <td>                
+                    {{#each waiterName.Tuesday.waiter}}
                     <li>
                         {{this}}
                     </li>
                 {{/each}}
-            </ul>
-        </div>
-        
-        <div>
-            <h3>Friday</h3>
-            <hr>
-            <ul>
-                {{#each waiterName.Friday.waiter}}
+                </td>
+                <td>                
+                    {{#each waiterName.Wednesday.waiter}}
                     <li>
                         {{this}}
                     </li>
                 {{/each}}
-            </ul>
-        </div>
-        
-        <div>
-            <h3>Saturday</h3>
-            <hr>
-            <ul>
-                {{#each waiterName.Saturday.waiter}}
+                </td>
+                <td>                
+                    {{#each waiterName.Thursday.waiter}}
                     <li>
                         {{this}}
                     </li>
                 {{/each}}
-            </ul>
-        </div>
+                </td>
+                <td>                
+                    {{#each waiterName.Friday.waiter}}
+                    <li>
+                        {{this}}
+                    </li>
+                {{/each}}
+                </td>
+                <td>                
+                    {{#each waiterName.Saturday.waiter}}
+                    <li>
+                        {{this}}
+                    </li>
+                {{/each}}
+                </td>
+                
+                
+
+            </tbody>
+        </table>
         
     </body>
 </html>

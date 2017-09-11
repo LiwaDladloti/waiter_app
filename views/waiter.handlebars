@@ -1,18 +1,24 @@
 <form action="" method="post">
-
-{{msg}}
+    <h1>Libonge Jazz Cafe</h1>
 <hr>
-<input type="checkbox" name="days" value="Sunday"> Sunday <br>
-<input type="checkbox" name="days" value="Monday"> Monday <br>
-<input type="checkbox" name="days" value="Tuesday"> Tuesday <br>
-<input type="checkbox" name="days" value="Wednesday"> Wednesday <br>
-<input type="checkbox" name="days" value="Thursday"> Thursday <br>
-<input type="checkbox" name="days" value="Friday"> Friday <br>
+<h4>{{msg}}</h4>
+    Please select days that you can be available to work on this week.
+    <br>
+    <br>
+<input type="checkbox" name="days" value="Sunday"> Sunday |
+<input type="checkbox" name="days" value="Monday"> Monday |
+<input type="checkbox" name="days" value="Tuesday"> Tuesday |
+<input type="checkbox" name="days" value="Wednesday"> Wednesday |
+<input type="checkbox" name="days" value="Thursday"> Thursday |
+<input type="checkbox" name="days" value="Friday"> Friday |
 <input type="checkbox" name="days" value="Saturday"> Saturday
-<hr>
-    {{daysSent}}
-    <hr>
+    <br>
+    <br>
 <button type="submit" name="sendDays">Send Days</button>
-    <hr>
+<br>
+<br>
+    {{daysSent}}
+<br>
+<!--    <hr>-->
     {{selectError}}
 </form>
