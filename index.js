@@ -90,11 +90,11 @@ app.post('/waiter/:user', function(req, res){
             if (err) {
                 console.log(err);
             } else {
-                res.render('waiter', {daysSent: 'days sent successfully :)'});
+                res.render('waiter', {daysSent: 'days sent successfully'});
             }
         })
     }  else {
-    res.render('waiter', {daysSent: 'days updated successfully :)'})
+    res.render('waiter', {daysSent: 'days updated successfully'})
     }
 }    
 //    else {
