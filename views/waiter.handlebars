@@ -6,13 +6,13 @@
     <br>
     <br>
     <hr>
-<input type="checkbox" name="days" value="Sunday"> Sunday |
-<input type="checkbox" name="days" value="Monday"> Monday |
-<input type="checkbox" name="days" value="Tuesday"> Tuesday |
-<input type="checkbox" name="days" value="Wednesday"> Wednesday |
-<input type="checkbox" name="days" value="Thursday"> Thursday |
-<input type="checkbox" name="days" value="Friday"> Friday |
-<input type="checkbox" name="days" value="Saturday"> Saturday
+<input type="checkbox" name="days" value="Sunday" {{#if result.days.Sunday}}Checked{{/if}}> Sunday |
+<input type="checkbox" name="days" value="Monday" {{#if result.days.Monday}}Checked{{/if}}> Monday |
+<input type="checkbox" name="days" value="Tuesday"{{#if result.days.Tuesday}}Checked{{/if}}> Tuesday |
+<input type="checkbox" name="days" value="Wednesday" {{#if result.days.Wednesday}}Checked{{/if}}> Wednesday |
+<input type="checkbox" name="days" value="Thursday" {{#if result.days.Thursday}}Checked{{/if}}> Thursday |
+<input type="checkbox" name="days" value="Friday" {{#if result.days.Friday}}Checked{{/if}}> Friday |
+<input type="checkbox" name="days" value="Saturday" {{#if result.days.Saturday}}Checked{{/if}}> Saturday
     <hr>
     <br>
     <br>

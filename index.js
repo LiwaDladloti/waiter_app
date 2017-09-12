@@ -38,13 +38,13 @@ var testSchema = mongoose.Schema({
 
 var waiterModel = mongoose.model('waiterModel', testSchema);
 
-app.get('/login', function(req, res){
-    res.render('login');
-});
-
-app.get('/signUp', function(req, res){
-    res.render('signup');
-});
+//app.get('/login', function(req, res){
+//    res.render('login');
+//});
+//
+//app.get('/signUp', function(req, res){
+//    res.render('signup');
+//});
 
 var status = false;
 var onlineUser = "";
@@ -97,19 +97,8 @@ app.post('/waiter/:user', function(req, res){
     res.render('waiter', {daysSent: 'days updated successfully'})
     }
 }    
-//    else {
-//      console.log('error');
-//      status = true;
-//      res.redirect('/waiter/' + onlineUser);
-//    }
 })
 });
-    
-//    if(daysSelected){
-//        var newShift = new waiterModel({
-//            user: user,
-//            days: pushedDays
-//        });
 
 app.get('/days', function(req, res){
     var workingDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
