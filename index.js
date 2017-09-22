@@ -24,7 +24,6 @@ console.log('We are connected');
 
 var testSchema = mongoose.Schema({
     user: String,
-//    pass: String,
     days: {
         Sunday: Boolean,
         Monday: Boolean,
@@ -38,14 +37,6 @@ var testSchema = mongoose.Schema({
 
 var waiterModel = mongoose.model('waiterModel', testSchema);
 
-//app.get('/login', function(req, res){
-//    res.render('login');
-//});
-//
-//app.get('/signUp', function(req, res){
-//    res.render('signup');
-//});
-
 var status = false;
 var onlineUser = "";
 
@@ -55,9 +46,18 @@ function statusMsg(stats) {
     }
 }
 
-app.get('/waiter/:user', function(req, res){
+app.get('/waiter/:user', function(req, res, next){
     onlineUser = req.params.user;
-    res.render('waiter', {msg: 'Welcome ' + req.params.user, selectError: statusMsg(status)});
+    
+    waiterModel.findOne({
+        user: req.params.user
+    },
+      function(err, result){
+        if (err) {
+            return next(err)
+        } 
+        res.render('waiter', {msg: 'Welcome ' + req.params.user, result: result})
+    })
 });
 
 app.post('/waiter/:user', function(req, res){
@@ -90,11 +90,11 @@ app.post('/waiter/:user', function(req, res){
             if (err) {
                 console.log(err);
             } else {
-                res.render('waiter', {daysSent: 'days sent successfully'});
+                res.render('waiter', {daysSent: 'days sent successfully', result: result});
             }
         })
     }  else {
-    res.render('waiter', {daysSent: 'days updated successfully'})
+    res.render('waiter', {daysSent: 'days updated successfully', result: result})
     }
 }    
 })
