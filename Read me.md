@@ -5,10 +5,10 @@ Workers can check in on which days they can be available.
 
 ## Development environment
 
-NodeJS
-Handlebars
-MongoDB
-Heroku
+NodeJS  |
+Handlebars |
+MongoDB |
+Heroku |
 
 ## Start the app
 
